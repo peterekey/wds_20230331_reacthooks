@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+function countInitial() {
+  console.log('run function');
+  return 4
+}
 
 function App() {
+
+  // Runs every time
+  // const [count, setCount] = useState(countInitial())
+
+  // Runs first time only
+  const [count, setCount] = useState(() => {
+    console.log('run function')
+    return 4;
+  });
+
+  const [theme, setTheme] = useState(() => 'blue')
+
+  function decrementCount() {
+    setCount(prevCount => prevCount - 1)
+    setTheme('red')
+  }
+
+  function incrementCount() {
+    setCount(prevCount => prevCount + 1)
+    setTheme('pink')
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <button onClick={decrementCount}>-</button>
+      <span>{count}</span>
+      <span>{theme}</span>
+      <button onClick={incrementCount}>+</button>
+    </>
+  )
 }
 
 export default App;
